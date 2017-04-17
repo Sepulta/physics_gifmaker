@@ -1,0 +1,9 @@
+import math
+import random
+import time
+import datetime
+import os
+import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, '../gif_maker')
+from gif_maker_file import make_gif

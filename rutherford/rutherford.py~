@@ -1,0 +1,67 @@
+import math
+import random
+import time
+import datetime
+import os
+import matplotlib.pyplot as plt
+import sys
+sys.path.insert(0, '../gif_maker')
+
+from gif_maker_file import make_gif
+sys.path.insert(0, '../general_functions')
+
+from general_functions_file import check_and_make, make_name
+
+from extra_functions_rutherford import update_location
+
+PLOT_FIGURE = False
+SAVE_FIGURE = False
+MAKE_GIFS = False
+DELETE_IMAGES_AFTER_GIF = False
+IMAGE_COUNTER = 0
+
+SAVE_FIGURE_LOCATION = 'plot_images'    #Fill in a (submap) location where the plot images are saved (default = 'plot_images') (necessary for making gifs)
+GIFS_LOCATION = 'simulation_gifs'   #Same goes for gif location (default = 'simulation_gifs')
+DATETIME_NOW = datetime.datetime.now()
+DATETIME_STRING = DATETIME_NOW.strftime("%Y_%m_%d_%H:%M")
+
+
+#Functions to check whether the directories exist, incase no: make them.
+check_and_make(SAVE_FIGURE,SAVE_FIGURE_LOCATION)
+check_and_make(MAKE_GIFS,GIFS_LOCATION)
+
+if MAKE_GIFS:
+    GIF_NAME = 'rutherford_' + DATETIME_STRING
+    print GIF_NAME
+    if not SAVE_FIGURE:
+        print 'WARNING: NO GIF CAN BE MADE IF THE FIGURES ARE NOT SAVED TO A LOCATION\nPLEASE CHANGE THE "SAVE_FIGURE" SETTING'
+    else:
+        print "Starting program to generate "+str(GIF_NAME)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+position_test_particle = [0,0]
+initial_velocity_test_particle = [1,0]
+velocity_test_particle = initial_velocity_test_particle[:]
+position_fixed_partile = [10,0]
+
+
+steps = 10
+dt = .1
+
+for i in range(steps):
+    position_test_particle = update_location(position_test_particle,velocity_test_particle,dt)
+    print position_test_particle 
+    
