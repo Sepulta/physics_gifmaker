@@ -39,8 +39,11 @@ DELETE_IMAGES_AFTER_GIF = True  # If set to true, it will remove the images
 IMAGE_COUNTER           = 0     # Counter for naming the images
 PLOT_PAUSE_TIME         = 0.01  # Pause time between each simulation step
 FPS                     = 20    # Frames per second for the gif
-PLOT_QUALITY            = 100   # Image quality (can be changed in order to reduce gif size)
-GIF_PLOT_STEPS          = 1     # Make a gif of each xth plot (1 is every plot, 2 is every second plot etc etc)
+PLOT_QUALITY            = 70   # Image quality (can be changed in order to reduce gif size)
+GIF_PLOT_STEPS          = 5     # Make a gif of each xth plot (1 is every plot, 2 is every second plot etc etc)
+PLOT_WIDTH              = 4     # Dimension of the resulting plot in inches
+PLOT_HEIGTH             = 4     # Dimension of the resulting plot in inches
+
 
 GENERAL_SIMULATION_NAME = 'diffusion'         # General project name
 SAVE_FIGURE_FORMAT      = '.jpg'              # Figure format (should stay jpg or perhaps png)
@@ -75,12 +78,12 @@ color_ball              = 'b'   # USER PARAMETERS  Color of the normal balls
 color_ball_special      = 'r'   # USER PARAMETERS  Color of the special balls
 color_ball_edge         = 'k'   # USER PARAMETERS  Color of the balls' edge
 ball_edge_size          = 1
-simulation_steps        = 10   # How many simulation time iterations the animation will run
+simulation_steps        = 100   # How many simulation time iterations the animation will run
 max_steps               = 10000 # For the names of the plots (000001.jpg)
 
-generate_positions_randomly = True    # Setting to generate the positions randomly over the box
+generate_positions_randomly = True   # Setting to generate the positions randomly over the box
 generate_positions_grid     = False    # Setting to generate the positions on a grid in the box
-grid_setting                = 1       # 0 = line of balls, 1 = square of balls
+grid_setting                = 0       # 0 = line of balls, 1 = square of balls
 
 #--/ define parameters of the box and figure
 xmin_box                =  0
@@ -111,7 +114,7 @@ r  = []
 circles = []
 
 #Create figure with set dimensions, and equal axis lengths (this to have the circles remain their shapes)
-plt.figure(figsize=(7,7))
+plt.figure(figsize=(PLOT_WIDTH, PLOT_HEIGTH))
 ax = plt.gca()
 ax.set_aspect('equal')
 
@@ -173,8 +176,8 @@ if generate_positions_randomly:
 if generate_positions_grid:
   x,y = divide_in_grid(xmin_box, xmax_box, ymin_box, ymax_box, Nparticles, radius_ball, Nspecialparticles, radius_ball_special, 0.5, grid_setting)
   r = [radius_ball_special for i in range(Nspecialparticles)] + [radius_ball for j in range(Nparticles)]
-  vx = [0 for i in range(Nspecialparticles)] + [(0.05 + 0.05 * random()) * math.cos(2 * math.pi * random()) for i in range(Nparticles)]
-  vy = [0 for i in range(Nspecialparticles)] + [(0.05 + 0.05 * random()) * math.sin(2 * math.pi * random()) for i in range(Nparticles)]
+  vx = [0 for i in range(Nspecialparticles)] + [(0.05 + 0.05 * random.random()) * math.cos(2 * math.pi * random.random()) for i in range(Nparticles)]
+  vy = [0 for i in range(Nspecialparticles)] + [(0.05 + 0.05 * random.random()) * math.sin(2 * math.pi * random.random()) for i in range(Nparticles)]
 
   for i_particle in range(Ntotalparticles):
    #--/ create a circle

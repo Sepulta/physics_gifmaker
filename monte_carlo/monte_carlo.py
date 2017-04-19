@@ -2,6 +2,7 @@ import sys
 import datetime
 import matplotlib.pyplot as plt
 import os
+import math
 
 #Insert extra paths to be able to import functions from those directories
 sys.path.insert(0, '../gif_maker')
@@ -20,7 +21,7 @@ from extra_functions_monte_carlo import gen_func, monte_carlo
 # The user can make a mathematical function and integrate this within a range using the monte-carlo technique
 # This is plotted and saved to jpg images in the specific folder, and those images will be processed into a 
 # Gif image. 
-# TO DO: Balkjes met fracties ipv tekst
+# TO DO: Better information on plot
 ###############################################################################################################
 
 ###############################################################################################################
@@ -35,7 +36,9 @@ IMAGE_COUNTER           = 0     # Counter for naming the images
 PLOT_PAUSE_TIME         = 0.01  # Pause time between each simulation step
 FPS                     = 10    # Frames per second for the gif
 PLOT_QUALITY            = 50    # Image quality (can be changed in order to reduce gif size)
-GIF_PLOT_STEPS          = 1     # Make a gif of each xth plot (1 is every plot, 2 is every second plot etc etc)
+GIF_PLOT_STEPS          = 3     # Make a gif of each xth plot (1 is every plot, 2 is every second plot etc etc)
+PLOT_WIDTH              = 5     # Dimension of the resulting plot in inches
+PLOT_HEIGTH             = 5     # Dimension of the resulting plot in inches
 
 GENERAL_SIMULATION_NAME = 'monte_carlo'       # General project name
 SAVE_FIGURE_FORMAT      = '.jpg'              # Figure format (should stay jpg or perhaps png)
@@ -81,8 +84,8 @@ def func_sin(x):
 
 
 #Specific settings for the function
-function_name           = func_x_squared        #Specified function to perform montecarlo simulation on
-x_min, x_max            = 0.0, 2                #Lower and upper x bounds
+function_name           = func_cos_squared        #Specified function to perform montecarlo simulation on
+x_min, x_max            = 0.0, math.pi                #Lower and upper x bounds
 steps                   = 1000                  #Total steps (which is, total random points)
 PLOT_STEPS              = 10                    #The plot is shown per PLOT_STEPS (because plotting each individual point would be tedious and non insightful)
 
@@ -102,6 +105,9 @@ display_info_on_graph   = True      # Whether to display the information of this
 ###############################################################################################################
 result_graph = gen_func(function_name, x_min, x_max, steps)
 y_min, y_max = result_graph[2], result_graph[3]
+
+#Set plot ratio and dimensions
+plt.figure(figsize=(PLOT_WIDTH, PLOT_HEIGTH))
 
 #Integration is from the zero x line, 
 if y_min > 0:
@@ -127,7 +133,6 @@ plot_range = range(0, steps, PLOT_STEPS)
 
 if plot_range[-1] != steps - 1:
     plot_range.append(steps - 1)
-
 
 #Loop for creating plots, possibly saving them
 for step in plot_range:

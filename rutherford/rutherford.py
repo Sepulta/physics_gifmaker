@@ -37,6 +37,8 @@ PLOT_PAUSE_TIME         = 0.01	# Pause time between each simulation steps
 FPS                     = 10	# Frames per second for the gif
 PLOT_QUALITY            = 50	# Image quality (can be changed in order to reduce gif size)
 GIF_PLOT_STEPS          = 1     # Make a gif of each xth plot (1 is every plot, 2 is every second plot etc etc)
+PLOT_WIDTH              = 6     # Dimension of the resulting plot in inches
+PLOT_HEIGTH             = 6     # Dimension of the resulting plot in inches
 
 GENERAL_SIMULATION_NAME = 'rutherford'		# General project name
 SAVE_FIGURE_FORMAT      = '.jpg'			# Figure format (should stay jpg or perhaps png)
@@ -66,7 +68,7 @@ PLOT_STEPS 							= 1
 steps 								= 100
 dt 									= .05
 time 								= 0
-POWER 								= 2			# Power is the power to which the force is inversely proptional to
+POWER 								= 3			# Power is the power to which the force is inversely proptional to
 
 if SAVE_FIGURE:
 	TOTAL_IMAGES 					= 10000 	#This number is only important for the saving of the images (e.g.: 000001.jpg)
@@ -124,9 +126,13 @@ draw_limits_y = [initial_position_test_particle[1] - plot_y_padding_factors[0] *
 	initial_position_fixed_particle[1] + plot_y_padding_factors[1] * Dx]
 
 inside_box = True
+
+#Set plot ratio and dimensions
+plt.figure(figsize=(PLOT_WIDTH, PLOT_HEIGTH))
+
 #Set plot background colors
 plt.rcParams['axes.facecolor'] = plot_background_color
-plt.rcParams['savefig.facecolor'] = plot_background_color
+plt.rcParams['savefig.facecolor'] = 'white'
 
 while inside_box == True:
 	#Calculate new force, new velocity and thereby the new position
@@ -149,7 +155,7 @@ while inside_box == True:
 
 	#Set plot background colors
 	plt.rcParams['axes.facecolor'] = plot_background_color
-	plt.rcParams['savefig.facecolor'] = plot_background_color
+	plt.rcParams['savefig.facecolor'] = 'white'
 
 	#Plot the path of the particle
 	if plot_path:

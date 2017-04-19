@@ -36,6 +36,8 @@ PLOT_PAUSE_TIME         = 0.01		# Pause time between each simulation step
 FPS                     = 10		# Frames per second for the gif
 PLOT_QUALITY            = 50		# Image quality (can be changed in order to reduce gif size)
 GIF_PLOT_STEPS          = 1     # Make a gif of each xth plot (1 is every plot, 2 is every second plot etc etc)
+PLOT_WIDTH              = 5     # Dimension of the resulting plot in inches
+PLOT_HEIGTH             = 5     # Dimension of the resulting plot in inches
 
 GENERAL_SIMULATION_NAME = '3_body'				# General project name
 SAVE_FIGURE_FORMAT      = '.jpg'				# Figure format (should stay jpg or perhaps png)
@@ -62,7 +64,7 @@ if MAKE_GIFS:
 #Simulation specific settings:	(User can change these values as they wish (debug before making gifs though!))#
 ###############################################################################################################
 generate_random_positions 		= True		# Decide to generate random positions, if not; You need to define the positions yourself
-simulate_until_out_of_bounds 	= False		# Run the simulation until one of the particles gets out out the box
+simulate_until_out_of_bounds 	= True		# Run the simulation until one of the particles gets out out the box
 generate_random_colors 			= True		# Let the script generate some random colors (can happen that they look like eachother though!) 
 plot_particle_history 			= True		# Plot the history of the particle
 
@@ -89,7 +91,7 @@ sizes_of_particles 				= [default_plot_size for el in range(number_of_particles)
 #Beware, if the masses are manually set, the list has to be as long as the number of particles
 
 
-masses_of_particles = [1,4,1]
+masses_of_particles = [1,2,1]
 if not masses_of_particles.count(masses_of_particles[0]/masses_of_particles[0]) == len(masses_of_particles):
 	sizes_of_particles = [default_plot_size * el for el in masses_of_particles]
 
@@ -112,8 +114,13 @@ if plot_particle_history:
 ###############################################################################################################
 #Simulation itself																							  #
 ###############################################################################################################
+
+#Set plot ratio and dimensions
+plt.figure(figsize=(PLOT_WIDTH, PLOT_HEIGTH))
+
+
 inside_box = True
-ctr 							= 0 		# Iterator initiation
+ctr = 0 		# Iterator initiation
 while inside_box == True and ctr < max_steps:
 	#Make new lists for positions and velocities each time.
 	new_positions = []
@@ -134,8 +141,9 @@ while inside_box == True and ctr < max_steps:
 		particle_position_history.append(particle_positions)
 	velocities_of_particles = new_velocities[:]
 
-	#Calculate whether the particles are still inside the box. This determines whether the simulation ends or not. 
-	inside_box = check_total_inside_box(particle_positions,x_bounds[0],x_bounds[1],y_bounds[0],y_bounds[1])
+	#Calculate whether the particles are still inside the box. This determines whether the simulation ends or not.
+	if simulate_until_out_of_bounds:
+		inside_box = check_total_inside_box(particle_positions,x_bounds[0],x_bounds[1],y_bounds[0],y_bounds[1])
 
 	#Manipulate lists to plot more easily
 	x_positions = [el[0] for el in particle_positions]
@@ -147,7 +155,7 @@ while inside_box == True and ctr < max_steps:
 
 	#Set background colors
 	plt.rcParams['axes.facecolor']=plot_background_color
-	plt.rcParams['savefig.facecolor']=plot_background_color
+	plt.rcParams['savefig.facecolor']='white'
 
 	#Plot their paths
 	if plot_particle_history:

@@ -17,6 +17,7 @@ from general_functions_file import check_and_make, make_name, delete_map_content
 # What this simulation mainly does is simulate a spreading fire, starting from the most upper row.            #
 # The fire spreads throughout a grid (partially) filled with forest tiles, able to catch fire.                #
 # The ratio of filling of forest tiles is adjustable, as well as the dimensions of the "forest"               #
+# TODO: Make window more fitting
 ###############################################################################################################
 
 ###############################################################################################################
@@ -61,9 +62,9 @@ if MAKE_GIFS:
 ###############################################################################################################
 
 width = 10              # Integer representing width
-height = 20             # Integer represention height
-ratio = 0.5             # Fraction representing percentage of burnable forest tiles
-mode = "moore"          # Neumann or moore
+height = 40             # Integer represention height
+ratio = 0.6             # Fraction representing percentage of burnable forest tiles
+mode = "moore"          # 'neumann' or 'moore'
 plot = False            # Whether to plot the graph of total tile values
 print_info = True       # Whether to print statements of reaching the other side 
 
