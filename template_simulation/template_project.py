@@ -71,7 +71,6 @@ if SAVE_FIGURE:
     short_save_name = make_name(IMAGE_COUNTER,TOTAL_IMAGES,SAVE_FIGURE_FORMAT)
     save_name = os.path.join(SAVE_FIGURE_LOCATION,short_save_name)
     plt.savefig(save_name, bbox_inches='tight', quality = PLOT_QUALITY)
-
     IMAGE_COUNTER += 1
 
 ###############################################################################################################

@@ -5,7 +5,7 @@ import numpy as np
 
 from PIL import Image
 
-warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
+#warnings.filterwarnings("ignore", category=np.VisibleDeprecationWarning) 
 
 def make_gif(image_location, gif_location, gif_name, fps, gif_plot_steps):
     print 'Make_gif function output:' 
