@@ -5,6 +5,8 @@ Most of the code is written by David Hendriks (davidhendriks93@gmail.com).
 This project was executed under the supervision of Ivo van Vulpen, who thought of the idea to make a python based GIF generator for physics based simulations.
 These GIFs can be used for educational purposes or just for fun. 
 
+Ivo recieved a GrassRoots grant from the University of Amsterdam, by which this project was made possible. They recognized the educational benefits of simple GIF animations of physics processes, which at times are quite hard to visualize yourself. 
+
 In the simulation_template directory, a template script is present in which the general outline of the files is shown. 
 
 There are ofcourse a lot more simulations that one can think of to visualize, and I'm always open for new ideas, but for now it is limited to a couple of simulations:
