@@ -28,6 +28,9 @@ Necessary imports per simulation project:
 
 For linux users, these packages are easy to install using pip (https://docs.python.org/2/installing/)
 The same can be used for MAC systems, and possibly with windows systems (but I haven't tried that)
+
+This code has not been thoroughly tested on operating systems other than Linux Ubuntu 14.04, and I've already noticed that mac d
+
 ===============
 For the GIF maker, code written by third parties is used, which has the copyright:
 Copyright (C) 2012, Almar Klein, Ant1, Marius van Voorden
