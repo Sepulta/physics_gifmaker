@@ -187,10 +187,10 @@ for step in plot_range:
         ##Figure out a way to nicely do this
         if display_info_on_graph:
             info_text = 'Step: %s'%str(step_text)
-            info_text += '\nCalculated surface: %s'%str(surface_integral)
-            info_text += '\nAmount outside integral: %s/%s'%(str(amt_outside),str(amt_tot))
-            info_text += '\nAmount inside integral (neg): %s/%s'%(str(amt_inside_neg),str(amt_tot))
-            info_text += '\nAmount inside integral (pos): %s/%s'%(str(amt_inside_pos),str(amt_tot))
+            info_text += '\nCalculated surface: %0.4f'%(surface_integral)
+            info_text += '\nAmt outside: %s/%s'%(str(amt_outside),str(amt_tot))
+            info_text += '\nAmt inside (neg): %s/%s'%(str(amt_inside_neg),str(amt_tot))
+            info_text += '\nAmt inside (pos): %s/%s'%(str(amt_inside_pos),str(amt_tot))
             plt.text(x_min,y_max+0.1*Dy,info_text)   
     plt.plot(x_inside_list, y_inside_list, good_color+'o')
     plt.plot(x_outside_list, y_outside_list, bad_color+'o')
